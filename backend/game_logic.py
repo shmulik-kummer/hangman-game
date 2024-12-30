@@ -16,14 +16,16 @@ def fetch_random_words() -> list:
 
 
 class HangmanGame:
-    def __init__(self, max_attempts: int = 6):
+    def __init__(self, word_list=None, max_attempts: int = 6):
         self.display_word = None
         self.remaining_attempts = None
         self.wrong_guesses = None
         self.guessed_letters = None
         self.word = None
         self.max_attempts = max_attempts
-        self.word_list = fetch_random_words()
+
+        # Use provided word_list or fetch random words if None is provided
+        self.word_list = word_list if word_list else fetch_random_words()
         self.reset_game()
 
     def reset_game(self):

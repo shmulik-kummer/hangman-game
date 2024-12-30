@@ -4,8 +4,7 @@ from game_logic import HangmanGame
 
 # Initialize the FastAPI app and Hangman game
 app = FastAPI()
-word_list = ["PYTHON", "HANGMAN", "DEVELOPER", "PROJECT", "FASTAPI"]
-game = HangmanGame(word_list)
+game = HangmanGame()
 
 
 # Request model for guesses
