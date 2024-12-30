@@ -1,16 +1,29 @@
 import random
-from typing import Dict, List
+from typing import Dict
+import requests
+
+
+def fetch_random_words() -> list:
+    try:
+        api_url = "https://random-word-api.herokuapp.com/word?number=10"
+        response = requests.get(api_url)
+        response.raise_for_status()  # Raise an error for HTTP issues
+        return response.json()  # Returns a list of words
+    except requests.RequestException as e:
+        print(f"Error fetching words: {e}")
+        # Fallback to default word list
+        return ["PYTHON", "HANGMAN", "DEVELOPER", "PROJECT", "FASTAPI"]
 
 
 class HangmanGame:
-    def __init__(self, word_list: List[str], max_attempts: int = 6):
+    def __init__(self, max_attempts: int = 6):
         self.display_word = None
         self.remaining_attempts = None
         self.wrong_guesses = None
         self.guessed_letters = None
         self.word = None
-        self.word_list = word_list
         self.max_attempts = max_attempts
+        self.word_list = fetch_random_words()
         self.reset_game()
 
     def reset_game(self):
